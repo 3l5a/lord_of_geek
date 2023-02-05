@@ -1,6 +1,6 @@
 ﻿<?php
-include 'App/modele/M_categorie.php';
-include 'App/modele/M_exemplaire.php';
+include 'App/modele/M_Categorie.php';
+include 'App/modele/M_Exemplaire.php';
 
 /**
  * Controleur pour la consultation des exemplaires
@@ -13,6 +13,7 @@ switch ($action) {
     case 'voirJeux' :
         $categorie = filter_input(INPUT_GET, 'categorie');
         $lesJeux = M_Exemplaire::trouveLesJeuxDeCategorie($categorie);
+        $toutLeStock = M_Exemplaire::trouveTousLesJeux();
         break;
     case 'ajouterAuPanier' :
         $idJeu = filter_input(INPUT_GET, 'jeu');

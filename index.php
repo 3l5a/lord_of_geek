@@ -23,6 +23,9 @@ if (!$uc) {
 
 // Controleur principal
 switch ($uc) {
+    case 'accueil':
+        include 'App/controleur/c_consultation.php';
+        break;
     case 'visite' :
         include 'App/controleur/c_consultation.php';
         break;
@@ -38,6 +41,28 @@ switch ($uc) {
     default:
         break;
 }
+
+
+  function findUser($email, $mdp)
+    {
+        $req = "SELECT clients.* FROM clients WHERE email = :email AND mot_de_passe = :mdp";
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':mdp', $mdp, PDO::PARAM_STR);
+        $res = $stmt->execute();
+
+        $client = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($res)
+        {
+        $_SESSION = $client;
+        var_dump($_SESSION);
+        }
+    }
+
+    findUser('zaza_t@hotmail.com', 'reprout');
+
 
 
 include("App/vue/template.php");

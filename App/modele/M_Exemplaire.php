@@ -15,17 +15,24 @@ class M_Exemplaire {
      * @return un tableau associatif
      */
     public static function trouveLesJeuxDeCategorie($idCategorie) {
-        $req = "SELECT exemplaires.*, references_jeux.titre, etats.nom_etat FROM exemplaires
+        $req = "SELECT exemplaires.*, references_jeux.titre, consoles.nom_console, etats.nom_etat FROM exemplaires
                 JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
                 JOIN references_jeux_has_categories ON references_jeux.id = references_jeux_has_categories.reference_jeu_id
                 JOIN categories ON references_jeux_has_categories.categorie_id = categories.id
                 JOIN etats ON exemplaires.etat_id = etats.id
-                WHERE categories.id = '$idCategorie'";
-        $res = AccesDonnees::query($req);
-        $lesLignes = $res->fetchAll();
+                JOIN consoles ON exemplaires.consoles_id = consoles.id
+                WHERE categories.id = :idCat";
+                
+        $pdo=AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':idCat', $idCategorie, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $lesLignes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $lesLignes;
     }
 
+  
     /**
      * Retourne les jeux concernés par le tableau des idProduits passé en argument
      *
@@ -40,9 +47,13 @@ class M_Exemplaire {
                 $req = "SELECT exemplaires.*, references_jeux.titre, etats.nom_etat FROM exemplaires 
                         JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
                         JOIN etats ON exemplaires.etat_id = etats.id
-                        WHERE exemplaires.id = '$unIdProduit'";
-                $res = AccesDonnees::query($req);
-                $unProduit = $res->fetch();
+                        WHERE exemplaires.id = :id";
+                $pdo=AccesDonnees::getPdo();
+                $stmt = $pdo->prepare($req);
+                $stmt->bindParam(':id', $unIdProduit, PDO::PARAM_INT);
+                $stmt->execute();
+
+                $unProduit = $stmt->fetch();
                 $lesProduits[] = $unProduit;
             }
         }

@@ -1,5 +1,5 @@
 ﻿<?php
-include 'App/modele/M_exemplaire.php';
+include 'App/modele/M_Exemplaire.php';
 /**
  * Controleur pour la gestion du panier
  * @author Loic LOG
@@ -14,10 +14,11 @@ switch ($action) {
             $desIdJeu = getLesIdJeuxDuPanier();
             $lesJeuxDuPanier = M_Exemplaire::trouveLesJeuxDuTableau($desIdJeu);
         } else {
-            afficheMessage("Panier Vide !!");
+            afficheMessage("Panier vide");
             $uc = '';
         }
         break;
+
 }
 
 

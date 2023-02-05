@@ -14,7 +14,7 @@
             <li class="last"></li>
         </ul>
     </aside>
-    <section  id="jeux">
+    <section  id="jeux" class="articles">
         <?php
         foreach ($lesJeux as $unJeu) {
             $id = $unJeu['id'];
@@ -23,20 +23,26 @@
             $prix = $unJeu['prix_vente'];
             $image = $unJeu['image'];
             $etat = $unJeu['nom_etat'];
+            $console = $unJeu['nom_console'];
+
             ?>
-            <article><a href="index.php?produit=<?= $id?>" title="Voir le jeu">
-                
-                    <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $titre; ?>"/>
+            <a href="index.php?produit=<?= $id ?>" title="Voir le jeu">
+            <article>
+                <div class="image">
+                    <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $titre; ?>" />
+                </div>
+                <div class="descr">
                     <h3><?= $titre ?></h3>
-                    <p>En savoir plus : <br><?= $description?></p>
-                    <p><?= $etat?></p>
-                    <p><?= "Prix : " . $prix . " Euros" ?>
+                    <p><?= $console ?></p>
+                    <p><?= $etat ?></p>
+                    <p><?= $prix . "€" ?>
                         <a href="index.php?uc=visite&categorie=<?= $categorie ?>&jeu=<?= $id ?>&action=ajouterAuPanier">
-                            <img src="public/images/mettrepanier.png" title="Ajouter au panier" class="add panier"/>
+                            <img src="public/images/mettrepanier.png" title="Ajouter au panier" class="add panier" />
                         </a>
                     </p>
-            </a>
+                </div>
             </article>
+        </a>
             <?php
         }
         ?>

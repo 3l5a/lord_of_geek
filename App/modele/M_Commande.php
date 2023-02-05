@@ -23,12 +23,31 @@ class M_Commande {
 
      */
     public static function creerCommande($nom, $prenom, $rue, $cp, $ville, $email, $listJeux) {
-        $req = "insert into commandes(client_id, adresse, cp, ville, email) values ('$nom', '$prenom', '$rue','$cp','$ville','$email')";
-        $res = AccesDonnees::exec($req);
+        $req = "insert into commandes(client_id, adresse, cp, ville, email) values (':nom', ':prenom', ':rue',':cp',':ville',':email')";
+
+
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
+        $stmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+        $stmt->bindParam(':rue', $rue, PDO::PARAM_STR);
+        $stmt->bindParam(':cp', $cp, PDO::PARAM_INT);
+        $stmt->bindParam(':ville', $ville, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         $idCommande = AccesDonnees::getPdo()->lastInsertId();
         foreach ($listJeux as $jeu) {
-            $req = "insert into lignes_commande(commande_id, exemplaire_id) values ('$idCommande','$jeu')";
-            $res = AccesDonnees::exec($req);
+            $req = "insert into lignes_commande(commande_id, exemplaire_id) values (':idCommande',':jeu')";
+            $pdo = AccesDonnees::getPdo();
+            $stmt = $pdo->prepare($req);
+            $stmt->bindParam(':idCommande', $idCommande, PDO::PARAM_INT).
+            $stmt->bindParam(':jeu', $jeu, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $stmt->fetch();
         }
     }
 
