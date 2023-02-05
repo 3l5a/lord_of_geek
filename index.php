@@ -26,44 +26,32 @@ switch ($uc) {
     case 'accueil':
         include 'App/controleur/c_consultation.php';
         break;
-    case 'visite' :
+    case 'visite':
         include 'App/controleur/c_consultation.php';
         break;
-    case 'panier' :
+    case 'produit' :
+        include 'App/controleur/c_consultation.php';
+        break;
+    case 'panier':
         include 'App/controleur/c_gestionPanier.php';
         break;
     case 'commander':
         include 'App/controleur/c_passerCommande.php';
         break;
-    case 'administrer' :
-        include 'App/controleur/c_monCompte.php';
+    case 'sInscrire':
+        include 'App/controleur/c_nouveauClient.php';
+        break;
+    case 'seConnecter':
+        include 'App/controleur/c_profil.php';
         break;
     default:
         break;
 }
 
 
-  function findUser($email, $mdp)
-    {
-        $req = "SELECT clients.* FROM clients WHERE email = :email AND mot_de_passe = :mdp";
-        $pdo = AccesDonnees::getPdo();
-        $stmt = $pdo->prepare($req);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':mdp', $mdp, PDO::PARAM_STR);
-        $res = $stmt->execute();
 
-        $client = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($res)
-        {
-        $_SESSION = $client;
-        var_dump($_SESSION);
-        }
-    }
-
-    findUser('zaza_t@hotmail.com', 'reprout');
 
 
 
 include("App/vue/template.php");
-

@@ -31,3 +31,14 @@ INSERT INTO clients (nom, prenom, adresse, cp, ville, email, mot_de_passe) VALUE
 
 # retrouver un client à partir de son email et de son mot de passe
 SELECT clients.* FROM clients WHERE email = 'elsa.thievet@hotmail.fr'AND mot_de_passe = 'prout';
+
+# mettre à jour une ligne utilisateur 
+UPDATE clients SET nom = "Thiévet", prenom = "Elsa", adresse = "impasse zola", cp = 34000, ville = "montpellier", email = "zaza_t@hotmail.com", mot_de_passe = "reprout" 
+WHERE id= 1;
+
+#ajouter une commande ???????????????????????????????????????????????????????????????????????????
+INSERT INTO commandes (client_id, mode_de_paiment) VALUES (1, 'CB'); #ajoute un id de commande
+SET @commande_id = LAST_INSERT_ROWID(); #récupère l'id de la derniere commande // ne marche paaaaaas, result null
+INSERT INTO lignes_commande (commande_id, exemplaire_id) VALUES (@commande_id, 1);
+
+DELETE FROM clients WHERE id = LAST_INSERT_ID(); # 0 rows affected ????????

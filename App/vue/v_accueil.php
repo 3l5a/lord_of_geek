@@ -8,10 +8,9 @@
 </section>
 
 <section class="articles">
-
     <?php
 
-    //affichage tous les jeux, suite fonction trouve tous les jeux
+    //affichage tous les jeux, suite fonction trouveTousLesJeux
     foreach ($toutLeStock as $jeu) {
 
         $id = $jeu['id'];

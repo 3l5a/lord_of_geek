@@ -10,7 +10,7 @@ class M_Session extends M_Utilisateur
      */
     public static function findUser($email, $mdp)
     {
-        $req = "SELECT clients.* FROM clients WHERE email = ':email' AND mot_de_passe = ':mdp'";
+        $req = "SELECT clients.* FROM clients WHERE email = :email AND mot_de_passe = :mdp";
         $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -19,11 +19,14 @@ class M_Session extends M_Utilisateur
 
         $client = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // if ($res)
-        // {
-        // $_SESSION = $client;
-        // var_dump($_SESSION);
-        // }
+        if ($res) {
+            $_SESSION['client'] = $client;
+            var_dump($_SESSION);
+            echo "<br>";
+            echo "<br>";
+            var_dump($_SESSION['jeux']);
+        }
+        return $client;
     }
 
     /**

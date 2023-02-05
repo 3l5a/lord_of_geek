@@ -62,7 +62,6 @@ class M_Exemplaire {
     /**
      * Retourne tous les jeux en vente, dans le stock
      *
-     * @param  $stock
      * @return tableau associatif
      */
     public static function trouveTousLesJeux() { 
@@ -77,6 +76,31 @@ class M_Exemplaire {
         $tousLesJeux = $res2->fetchAll();
 
         return $tousLesJeux;
+    }
+
+
+    /**
+     * retourne un tableau assoc des infos d'un jeu dont l'id est l'argument
+     *
+     * @param [type] $idJeu
+     * @return [type] tableau associatif
+     */
+    public static function trouveUnJeu($idJeu) {
+        $req = "SELECT exemplaires.*, references_jeux.titre, consoles.nom_console, etats.nom_etat FROM exemplaires
+                JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
+                JOIN references_jeux_has_categories ON references_jeux.id = references_jeux_has_categories.reference_jeu_id
+                JOIN categories ON references_jeux_has_categories.categorie_id = categories.id
+                JOIN etats ON exemplaires.etat_id = etats.id
+                JOIN consoles ON exemplaires.consoles_id = consoles.id
+                WHERE references_jeux.id = :idJeu";
+                
+        $pdo=AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':idJeu', $idJeu, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $leJeu = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $leJeu;
     }
 
 }

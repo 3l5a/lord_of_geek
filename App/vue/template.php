@@ -43,8 +43,17 @@ Prototype de Lord Of Geek (LOG)
                     include ("App/vue/v_commande.php");
                     break;
                 case 'compte' :
-                    include ("App/vue/v_compte.php");
+                    if ($_SESSION['client'])
+                    {
+                        $uc='connecte';
+                    }
+                    else 
+                    {
+                    include ("App/vue/v_authentification.php");
+                    }
                     break;
+                case 'connecte' :
+                    include ("App/vue/v_compte.php");
                 default:
                     break;
             }

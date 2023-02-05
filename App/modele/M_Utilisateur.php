@@ -1,7 +1,5 @@
 <?php
 
-
-
 class M_Utilisateur
 {
     /**
@@ -16,7 +14,7 @@ class M_Utilisateur
      * @param [type] $mdp
      * @return void
      */
-    public static function signUp($nom, $prenom, $adresse, $cp, $ville, $email, $mdp)
+    public static function signUp($nom, $prenom, $adresse, $cp, $ville, $email, $mdp): bool
     {
 
         $req = "INSERT INTO clients (nom, prenom, adresse, cp, ville, email, mot_de_passe) 
@@ -32,15 +30,7 @@ class M_Utilisateur
         $stmt->bindParam(':mdp', $mdp, PDO::PARAM_STR);
         $res = $stmt->execute();
 
-        if ($res)
-        {
-            echo "vous êtes bien inscrit";
-        } else {
-            echo "erreur technique";
-        }
-
-        //condition de validation, l'utilisateur a-t-il été bien créé ?
-
+        return $res;
     }
 
 
@@ -61,7 +51,7 @@ class M_Utilisateur
         $stmt->bindParam(':mdp', $mdp, PDO::PARAM_STR);
         $res = $stmt->execute();
 
-        return $res;
+        $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -75,7 +65,7 @@ class M_Utilisateur
      * @param [type] $ville
      * @return void
      */
-    public static function updateInfo($idUser, $nom, $prenom, $adresse, $cp, $ville)
+    public static function updateInfo($idUser, $nom, $prenom, $adresse, $cp, $ville): bool
     {
         $req = "UPDATE clients SET nom= :nom, prenom = :prenom, adresse = :adresse, cp = :cp, ville = :ville WHERE id = :idUser";
 
