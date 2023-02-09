@@ -18,13 +18,14 @@ SELECT exemplaires.*, etats.nom_etat, references_jeux.titre FROM exemplaires
 JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
 JOIN etats ON exemplaires.etat_id = etats.id;
 
-#retourne tous les exemplaires en stock : IMAGE, DESCR, CONSOLE, ETAT
-SELECT DISTINCT exemplaires.* , references_jeux.titre, etats.nom_etat, consoles.nom_console FROM exemplaires
+#retourne tous les exemplaires en stock : IMAGE, DESCR, CONSOLE, ETAT, SERIE
+SELECT DISTINCT exemplaires.* , references_jeux.titre, etats.nom_etat, consoles.nom_console, series.nom_serie FROM exemplaires
 JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
 JOIN references_jeux_has_categories ON references_jeux.id = references_jeux_has_categories.reference_jeu_id
 JOIN categories ON references_jeux_has_categories.categorie_id = categories.id
 JOIN etats ON exemplaires.etat_id = etats.id
-JOIN consoles ON exemplaires.consoles_id=consoles.id;
+JOIN consoles ON exemplaires.consoles_id=consoles.id
+LEFT JOIN series ON references_jeux.series_id = series.id;
 
 #ajouter un utilisateur
 INSERT INTO clients (nom, prenom, adresse, cp, ville, email, mot_de_passe) VALUES ('hor', 'soriya', '10, rue des séquoias', 34830, 'clapiers', 'hor.soriya@gmail.com', 'soriya');

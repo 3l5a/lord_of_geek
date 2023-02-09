@@ -49,9 +49,11 @@ class M_Utilisateur
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->bindParam(':mdp', $mdp, PDO::PARAM_STR);
-        $res = $stmt->execute();
+        $stmt->execute();
 
-        $stmt->fetch(PDO::FETCH_ASSOC);
+        $client = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $client;
     }
 
     /**

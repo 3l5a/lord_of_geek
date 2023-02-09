@@ -5,7 +5,8 @@
  *
  * @author Loic LOG
  */
-class M_Exemplaire {
+class M_Exemplaire
+{
 
     /**
      * Retourne sous forme d'un tableau associatif tous les jeux de la
@@ -14,7 +15,8 @@ class M_Exemplaire {
      * @param $idCategorie
      * @return un tableau associatif
      */
-    public static function trouveLesJeuxDeCategorie($idCategorie) {
+    public static function trouveLesJeuxDeCategorie($idCategorie)
+    {
         $req = "SELECT exemplaires.*, references_jeux.titre, consoles.nom_console, etats.nom_etat FROM exemplaires
                 JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
                 JOIN references_jeux_has_categories ON references_jeux.id = references_jeux_has_categories.reference_jeu_id
@@ -22,8 +24,8 @@ class M_Exemplaire {
                 JOIN etats ON exemplaires.etat_id = etats.id
                 JOIN consoles ON exemplaires.consoles_id = consoles.id
                 WHERE categories.id = :idCat";
-                
-        $pdo=AccesDonnees::getPdo();
+
+        $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':idCat', $idCategorie, PDO::PARAM_INT);
         $stmt->execute();
@@ -32,14 +34,14 @@ class M_Exemplaire {
         return $lesLignes;
     }
 
-  
     /**
      * Retourne les jeux concernés par le tableau des idProduits passé en argument
      *
      * @param $desIdJeux tableau d'idProduits
      * @return un tableau associatif
      */
-    public static function trouveLesJeuxDuTableau($desIdJeux) {
+    public static function trouveLesJeuxDuTableau($desIdJeux)
+    {
         $nbProduits = count($desIdJeux);
         $lesProduits = array();
         if ($nbProduits != 0) {
@@ -48,7 +50,7 @@ class M_Exemplaire {
                         JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
                         JOIN etats ON exemplaires.etat_id = etats.id
                         WHERE exemplaires.id = :id";
-                $pdo=AccesDonnees::getPdo();
+                $pdo = AccesDonnees::getPdo();
                 $stmt = $pdo->prepare($req);
                 $stmt->bindParam(':id', $unIdProduit, PDO::PARAM_INT);
                 $stmt->execute();
@@ -59,25 +61,26 @@ class M_Exemplaire {
         }
         return $lesProduits;
     }
+
     /**
      * Retourne tous les jeux en vente, dans le stock
      *
      * @return tableau associatif
      */
-    public static function trouveTousLesJeux() { 
+    public static function trouveTousLesJeux()
+    {
         $reqJeux = "SELECT DISTINCT exemplaires.* , references_jeux.titre, etats.nom_etat, consoles.nom_console FROM exemplaires
                     JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
                     JOIN references_jeux_has_categories ON references_jeux.id = references_jeux_has_categories.reference_jeu_id
                     JOIN categories ON references_jeux_has_categories.categorie_id = categories.id
                     JOIN etats ON exemplaires.etat_id = etats.id
-                    JOIN consoles ON exemplaires.consoles_id=consoles.id"; 
-                    // requete pour obtenir tous les jeux avec leurs titre + état + prix de vente + image + console du jeu
+                    JOIN consoles ON exemplaires.consoles_id=consoles.id";
+        // requete pour obtenir tous les jeux avec leurs titre + état + prix de vente + image + console du jeu
         $res2 = AccesDonnees::query($reqJeux);
         $tousLesJeux = $res2->fetchAll();
 
         return $tousLesJeux;
     }
-
 
     /**
      * retourne un tableau assoc des infos d'un jeu dont l'id est l'argument
@@ -85,16 +88,18 @@ class M_Exemplaire {
      * @param [type] $idJeu
      * @return [type] tableau associatif
      */
-    public static function trouveUnJeu($idJeu) {
-        $req = "SELECT exemplaires.*, references_jeux.titre, consoles.nom_console, etats.nom_etat FROM exemplaires
+    public static function trouveUnJeu($idJeu)
+    {
+        $req = "SELECT exemplaires.*, references_jeux.titre, consoles.nom_console, etats.nom_etat, series.nom_serie FROM exemplaires
                 JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
                 JOIN references_jeux_has_categories ON references_jeux.id = references_jeux_has_categories.reference_jeu_id
                 JOIN categories ON references_jeux_has_categories.categorie_id = categories.id
                 JOIN etats ON exemplaires.etat_id = etats.id
                 JOIN consoles ON exemplaires.consoles_id = consoles.id
-                WHERE references_jeux.id = :idJeu";
-                
-        $pdo=AccesDonnees::getPdo();
+                LEFT JOIN series ON references_jeux.series_id = series.id
+                WHERE exemplaires.id = :idJeu";
+
+        $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':idJeu', $idJeu, PDO::PARAM_INT);
         $stmt->execute();
@@ -102,6 +107,4 @@ class M_Exemplaire {
         $leJeu = $stmt->fetch(PDO::FETCH_ASSOC);
         return $leJeu;
     }
-
 }
-

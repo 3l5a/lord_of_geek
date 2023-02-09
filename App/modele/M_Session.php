@@ -1,5 +1,5 @@
 <?php
-class M_Session extends M_Utilisateur
+class M_Session 
 {
     /**
      * if user is in database, session is client's info
@@ -15,18 +15,16 @@ class M_Session extends M_Utilisateur
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->bindParam(':mdp', $mdp, PDO::PARAM_STR);
-        $res = $stmt->execute();
+        $stmt->execute();
 
         $client = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($res) {
-            $_SESSION['client'] = $client;
-            var_dump($_SESSION);
-            echo "<br>";
-            echo "<br>";
-            var_dump($_SESSION['jeux']);
-        }
+        //rajouter if $client exists && pasword verify : return client, sinon return false
+        if ($client) {
         return $client;
+        }
+        else {
+            return false;
+        }
     }
 
     /**

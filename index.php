@@ -12,9 +12,17 @@ require("./util/fonctions.inc.php");
 require('./util/validateurs.inc.php');
 require("./App/modele/AccesDonnees.php");
 
+$clientSession = [];
+
+if (!empty($_SESSION['client'])) {
+    $clientSession = $_SESSION['client'];
+} // si $_SESSION existe, alors il définit $clientSession // $_SESSION['client'] est définit dans le controleur du compte client
+
+
 
 $uc = filter_input(INPUT_GET, 'uc'); // Use Case
 $action = filter_input(INPUT_GET, 'action'); // Action
+$id = filter_input(INPUT_GET, 'id'); // Id d'un jeu
 initPanier();
 
 if (!$uc) {
@@ -25,11 +33,12 @@ if (!$uc) {
 switch ($uc) {
     case 'accueil':
         include 'App/controleur/c_consultation.php';
+        $toutLeStock = M_Exemplaire::trouveTousLesJeux();
         break;
     case 'visite':
         include 'App/controleur/c_consultation.php';
         break;
-    case 'produit' :
+    case 'produit':
         include 'App/controleur/c_consultation.php';
         break;
     case 'panier':
@@ -41,8 +50,11 @@ switch ($uc) {
     case 'sInscrire':
         include 'App/controleur/c_nouveauClient.php';
         break;
-    case 'seConnecter':
-        include 'App/controleur/c_profil.php';
+    case 'profil':
+        include 'App/controleur/c_monCompte.php';
+        break;
+    case 'authentification':
+        include 'App/controleur/c_authentification.php';
         break;
     default:
         break;

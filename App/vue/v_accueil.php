@@ -21,7 +21,7 @@
         $etat = $jeu['nom_etat'];
         $console = $jeu['nom_console'];
     ?>
-        <a href="index.php?produit=<?= $id ?>" title="Voir le jeu">
+            <a href="index.php?uc=produit&action=consulterJeu&id=<?= $id ?>" title="Voir le jeu">
             <article>
                 <div class="image">
                     <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $titre; ?>" />

@@ -25,7 +25,7 @@ switch ($action) {
         }
         $lesJeux = M_Exemplaire::trouveLesJeuxDeCategorie($categorie);
         break;
-    case 'produit' :
+    case 'consulterJeu' :
         $idJeu = filter_input(INPUT_GET, 'id');
         $unJeu = M_Exemplaire::trouveUnJeu($idJeu);
         break;
