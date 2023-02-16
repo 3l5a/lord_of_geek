@@ -34,10 +34,8 @@ class M_Session
      */
     public static function signOut()
     {
-        if ($_SESSION) {
             unset($_SESSION['client']);
             header('Location: index.php');
             die();
-        }
     }
 }

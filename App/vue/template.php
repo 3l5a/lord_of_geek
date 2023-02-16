@@ -15,7 +15,10 @@ Prototype de Lord Of Geek (LOG)
 <body>
     <header>
         <!-- Images En-tête -->
-        <img src="public/images/logo.svg" alt="Logo Lord Of Geek" />
+        <div>
+            <img src="public/images/logo.svg" alt="Logo Lord Of Geek" />
+            <p>Bonjour <?= $clientSession['prenom']?></p>
+        </div>
         <!--  Menu haut-->
         <nav id="menu">
             <ul>
@@ -28,9 +31,18 @@ Prototype de Lord Of Geek (LOG)
                 <a href="index.php?uc=panier&action=voirPanier">
                     <li> Mon panier </li>
                 </a>
-                <a href="index.php?uc=compte">
-                    <li> Mon compte </li>
-                </a>
+                <?php
+                if (!empty($clientSession)) {
+                ?><a href="index.php?uc=compte">
+                        <li> Mon compte </li>
+                    </a>
+                <?php } else { ?>
+                    <a href="index.php?uc=authentification">
+                        <li> Se connecter / S'inscrire </li>
+                    </a>
+                <?php } ?>
+
+
             </ul>
         </nav>
 
@@ -56,12 +68,7 @@ Prototype de Lord Of Geek (LOG)
                 include("App/vue/v_commande.php");
                 break;
             case 'compte':
-                if ($_SESSION['client']) {
-                    $uc = 'profil';
-                    include("App/vue/v_compte.php");
-                } else {
-                    include("App/vue/v_authentification.php");
-                }
+                include("App/vue/v_compte.php");
                 break;
             case 'authentification':
                 include 'App/vue/v_authentification.php';

@@ -1,6 +1,7 @@
-<?php
-var_dump(M_Utilisateur::findUser($email, $mdp));
+<?php 
+// unset($_SESSION['client'])
 ?>
+
 <section class="profil">
     <h2>Bonjour <? $_SESSION['client']['prenom'].$_SESSION['client']['nom'] ?> vous êtes bien connecté-e sur Lord Of Geek</h2>
     <h3 style="color:orange">Vos informations :</h3>

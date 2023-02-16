@@ -56,14 +56,12 @@ switch ($uc) {
     case 'authentification':
         include 'App/controleur/c_authentification.php';
         break;
+    case 'compte':
+        include 'App/controleur/c_monCompte.php';
+        break;
     default:
         break;
 }
-
-
-
-
-
 
 
 include("App/vue/template.php");
