@@ -10,12 +10,12 @@ switch ($action) {
     case 'voirTousLesJeux':
         $toutLeStock = M_Exemplaire::trouveTousLesJeux();
         break;
-    case 'voirJeux' :
+    case 'voirJeux':
         $categorie = filter_input(INPUT_GET, 'categorie');
         $lesJeux = M_Exemplaire::trouveLesJeuxDeCategorie($categorie);
         $toutLeStock = M_Exemplaire::trouveTousLesJeux();
         break;
-    case 'ajouterAuPanier' :
+    case 'ajouterAuPanier':
         $idJeu = filter_input(INPUT_GET, 'jeu');
         $categorie = filter_input(INPUT_GET, 'categorie');
         if (!ajouterAuPanier($idJeu)) {
@@ -25,11 +25,12 @@ switch ($action) {
         }
         $lesJeux = M_Exemplaire::trouveLesJeuxDeCategorie($categorie);
         break;
-    case 'consulterJeu' :
+    case 'consulterJeu':
         $idJeu = filter_input(INPUT_GET, 'id');
         $unJeu = M_Exemplaire::trouveUnJeu($idJeu);
         break;
     default:
+        $toutLeStock = M_Exemplaire::trouveTousLesJeux();
         $lesJeux = [];
         break;
 }

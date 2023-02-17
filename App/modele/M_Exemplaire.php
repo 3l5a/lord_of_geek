@@ -15,7 +15,7 @@ class M_Exemplaire
      * @param $idCategorie
      * @return un tableau associatif
      */
-    public static function trouveLesJeuxDeCategorie($idCategorie)
+    public static function trouveLesJeuxDeCategorie(int $idCategorie): array
     {
         $req = "SELECT exemplaires.*, references_jeux.titre, consoles.nom_console, etats.nom_etat FROM exemplaires
                 JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
@@ -40,7 +40,7 @@ class M_Exemplaire
      * @param $desIdJeux tableau d'idProduits
      * @return un tableau associatif
      */
-    public static function trouveLesJeuxDuTableau($desIdJeux)
+    public static function trouveLesJeuxDuTableau(array $desIdJeux)
     {
         $nbProduits = count($desIdJeux);
         $lesProduits = array();
@@ -88,7 +88,7 @@ class M_Exemplaire
      * @param [type] $idJeu
      * @return [type] tableau associatif
      */
-    public static function trouveUnJeu($idJeu)
+    public static function trouveUnJeu(int $idJeu)
     {
         $req = "SELECT exemplaires.*, references_jeux.titre, consoles.nom_console, etats.nom_etat, series.nom_serie FROM exemplaires
                 JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id

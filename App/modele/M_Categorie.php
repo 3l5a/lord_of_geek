@@ -12,7 +12,8 @@ class M_Categorie {
      *
      * @return le tableau associatif des catégories
      */
-    public static function trouveLesCategories() {
+    public static function trouveLesCategories(): array 
+    {
         $req = "SELECT * FROM categories";
         $res = AccesDonnees::query($req);
         $lesLignes = $res->fetchAll();

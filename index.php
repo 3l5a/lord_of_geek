@@ -16,8 +16,8 @@ $clientSession = [];
 
 if (!empty($_SESSION['client'])) {
     $clientSession = $_SESSION['client'];
-} // si $_SESSION existe, alors il définit $clientSession // $_SESSION['client'] est définit dans le controleur du compte client
-
+} // si $_SESSION existe, alors il définit $clientSession 
+// $_SESSION['client'] est défini dans le controleur du compte client
 
 
 $uc = filter_input(INPUT_GET, 'uc'); // Use Case
@@ -33,7 +33,6 @@ if (!$uc) {
 switch ($uc) {
     case 'accueil':
         include 'App/controleur/c_consultation.php';
-        $toutLeStock = M_Exemplaire::trouveTousLesJeux();
         break;
     case 'visite':
         include 'App/controleur/c_consultation.php';

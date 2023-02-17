@@ -59,7 +59,8 @@ class M_Commande {
      * @param $mail : chaîne
      * @return : array
      */
-    public static function estValide($nom, $rue, $ville, $cp, $mail) {
+    public static function estValide($nom, $rue, $ville, $cp, $mail): array 
+    {
         $erreurs = [];
         if ($nom == "") {
             $erreurs[] = "Il faut saisir le champ nom";

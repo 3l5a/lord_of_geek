@@ -221,7 +221,7 @@ label {
 input {
     margin-left: 1%;
     width: 30%;
-    border: #CCC 1px solid;
+    border: #979595 1px solid;
     margin: 3px;
 }
 
@@ -239,5 +239,31 @@ input[type="submit"] {
     background-color: orange;
     cursor: pointer;
     border-radius: 5px;
+}
+
+/* formulaire d'inscription */
+
+#authentification {
+    display: flex;
+}
+
+#authentification form {
+    width: 500px;
+    padding-left: 85px;
+
+}
+#authentification form:nth-of-type(2) {
+    border-left: 1px solid white;
+}
+
+#authentification form label,
+#authentification form input[type= password],
+#authentification form input[type= text] {
+    width: 200px;
+}
+
+#authentification form input[type= submit] {
+    width: 400px;
+    margin-top: 15px;
 }
 

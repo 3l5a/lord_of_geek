@@ -2,13 +2,13 @@
 class M_Session 
 {
     /**
-     * if user is in database, session is client's info
+     * if user is in database, session = client's informations
      *
      * @param [type] $email
      * @param [type] $mdp
      * @return void
      */
-    public static function findUser($email, $mdp)
+    public static function findUser(string $email, string $mdp)
     {
         $req = "SELECT clients.* FROM clients WHERE email = :email AND mot_de_passe = :mdp";
         $pdo = AccesDonnees::getPdo();

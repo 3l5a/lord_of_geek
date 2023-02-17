@@ -8,19 +8,9 @@ include 'App/modele/M_Session.php';
  */
 switch ($action) {
     case 'signedUp':
-        if (!$_SESSION['client']) {
-            header('Location: index.php?uc=accueil&action=voirTousLesJeux');
-        } else {
-            $email = filter_input(INPUT_POST, 'email');
-            $mdp = filter_input(INPUT_POST, 'mdp');
-            M_Utilisateur::findUser($email, $mdp);
-        };
+        $orders = M_Utilisateur::userOrders($clientSession['id']);
         break;
     case 'signOut':
-        var_dump($clientSession);
-        // M_Session::signOut();
-        unset($_SESSION['client']);
-        header('Location: index.php');
-        die();
+        M_Session::signOut();
         break;
 }

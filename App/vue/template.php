@@ -17,7 +17,6 @@ Prototype de Lord Of Geek (LOG)
         <!-- Images En-tête -->
         <div>
             <img src="public/images/logo.svg" alt="Logo Lord Of Geek" />
-            <p>Bonjour <?= $clientSession['prenom']?></p>
         </div>
         <!--  Menu haut-->
         <nav id="menu">
@@ -33,7 +32,7 @@ Prototype de Lord Of Geek (LOG)
                 </a>
                 <?php
                 if (!empty($clientSession)) {
-                ?><a href="index.php?uc=compte">
+                ?><a href="index.php?uc=compte&action=signedUp">
                         <li> Mon compte </li>
                     </a>
                 <?php } else { ?>
@@ -72,8 +71,10 @@ Prototype de Lord Of Geek (LOG)
                 break;
             case 'authentification':
                 include 'App/vue/v_authentification.php';
+                break;
             case 'profil':
                 include("App/vue/v_compte.php");
+                break;
             default:
                 break;
         }

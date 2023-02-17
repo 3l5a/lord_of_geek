@@ -1,6 +1,10 @@
 <section>
     <h1>
         Bienvenue sur Lord Of Geek
+
+        <?php if (!empty($_SESSION['client'])) {
+        ?> <span style="color: orange"><?= $clientSession['prenom'] ?></span>
+        <?php } ?>
     </h1>
     <h2>
         Retrouvez ici tous nos jeux
@@ -21,7 +25,7 @@
         $etat = $jeu['nom_etat'];
         $console = $jeu['nom_console'];
     ?>
-            <a href="index.php?uc=produit&action=consulterJeu&id=<?= $id ?>" title="Voir le jeu">
+        <a href="index.php?uc=produit&action=consulterJeu&id=<?= $id ?>" title="Voir le jeu">
             <article>
                 <div class="image">
                     <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $titre; ?>" />
