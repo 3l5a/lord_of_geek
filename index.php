@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+// unset($_SESSION); //debug
 
 
 // Pour afficher les erreurs PHP
@@ -46,11 +47,8 @@ switch ($uc) {
     case 'commander':
         include 'App/controleur/c_passerCommande.php';
         break;
-    case 'sInscrire':
-        include 'App/controleur/c_nouveauClient.php';
-        break;
     case 'profil':
-        include 'App/controleur/c_monCompte.php';
+        include 'App/controleur/c_authentification.php';
         break;
     case 'authentification':
         include 'App/controleur/c_authentification.php';

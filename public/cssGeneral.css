@@ -245,13 +245,15 @@ input[type="submit"] {
 
 #authentification {
     display: flex;
+    align-items: center;
+    height: 500px;
 }
 
 #authentification form {
     width: 500px;
     padding-left: 85px;
-
 }
+
 #authentification form:nth-of-type(2) {
     border-left: 1px solid white;
 }
@@ -259,7 +261,7 @@ input[type="submit"] {
 #authentification form label,
 #authentification form input[type= password],
 #authentification form input[type= text] {
-    width: 200px;
+    width: 240px;
 }
 
 #authentification form input[type= submit] {

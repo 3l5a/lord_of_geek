@@ -9,16 +9,18 @@ include 'App/modele/M_Commande.php';
 switch ($action) {
     case 'passerCommande' :
         $n = nbJeuxDuPanier();
-        if ($n > 0) {
-            $nom = '';
-            $rue = '';
-            $ville = '';
-            $cp = '';
-            $mail = '';
-        } else {
-            afficheMessage("Votre panier est vide.");
-            $uc = '';
+        if (isset($clientSession)) {
+            $jeux = getLesIdJeuxDuPanier();
+            if ($jeux > 0) {
+                $cb = "CB";
+                $commande = M_Commande::createOrder($clientSession['id'], $cb, $jeux);
+                supprimerPanier();
+                afficheMessage("Votre commande est bien enregistrée.");
+            } else {
+                afficheMessage("Votre panier est vide.");
+                $uc = '';
         }
+    }
         break;
     case 'confirmerCommande' :
         $nom = filter_input(INPUT_POST, 'nom');
@@ -27,13 +29,13 @@ switch ($action) {
         $ville = filter_input(INPUT_POST, 'ville');
         $cp = filter_input(INPUT_POST, 'cp');
         $mail = filter_input(INPUT_POST, 'mail');
-        $errors = M_Commande::estValide($nom, $rue, $ville, $cp, $mail);
+        $errors = M_Commande::estValide($nom, $prenom, $rue, $ville, $cp, $mail);
         if (count($errors) > 0) {
             // Si une erreur, on recommence
             afficheErreurs($errors);
         } else {
             $lesIdJeu = getLesIdJeuxDuPanier();
-            M_Commande::creerCommande($nom, $prenom, $rue, $cp, $ville, $mail, $lesIdJeu);
+            M_Commande::createOrder($nom, $prenom, $rue, $cp, $ville, $mail, $lesIdJeu);
             supprimerPanier();
             afficheMessage("Commande enregistrée");
             $uc = '';

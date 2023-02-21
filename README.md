@@ -21,5 +21,7 @@ image par défaut dans chaque jeu
 
 infos pour chaque jeu : titre, image, état, prix de vente
 
+Quand les logs sont incorrects : fatal error, ecran blanc + message d'erreur ????
+
 
 

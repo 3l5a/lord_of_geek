@@ -18,8 +18,7 @@ switch ($action) {
             $uc = '';
         }
         break;
-
-}
+  }
 
 
 

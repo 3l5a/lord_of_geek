@@ -47,7 +47,9 @@ Prototype de Lord Of Geek (LOG)
 
     </header>
     <main>
+
         <?php
+        
         // Controleur de vues
         // Selon le cas d'utilisation, j'inclus un controleur ou simplement une vue
         switch ($uc) {
@@ -73,7 +75,7 @@ Prototype de Lord Of Geek (LOG)
                 include 'App/vue/v_authentification.php';
                 break;
             case 'profil':
-                include("App/vue/v_compte.php");
+                include("App/vue/v_registered.php");
                 break;
             default:
                 break;
