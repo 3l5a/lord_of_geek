@@ -13,4 +13,6 @@ switch ($action) {
     case 'signOut':
         M_Session::signOut();
         break;
+    case 'updateInfo':
+        
 }

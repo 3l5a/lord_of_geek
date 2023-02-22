@@ -5,7 +5,7 @@
     <p>Adresse : <?= $_SESSION['client']['adresse'] ?></p>
     <p>Code postal : <?= $_SESSION['client']['cp'] ?></p>
     <p>Ville : <?= $_SESSION['client']['ville'] ?></p>
-    <!-- <a href="index.php?uc=compte&action=updateInfo" style="background-color:orange; padding:4px">Modifier vos informations</a> -->
+    <!-- <a href="index.php?uc=profileInfo&action=updateInfo" style="background-color:orange; padding:4px">Modifier vos informations</a> -->
     <a href="index.php?uc=compte&action=signOut" style="background-color:orange; padding:4px; margin-top: 10px">Vous déconnecter</a>
     <br> <br>
     <h3 style="color:orange">Vos dernières commandes :</h3>

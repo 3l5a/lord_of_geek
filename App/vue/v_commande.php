@@ -1,7 +1,7 @@
 ﻿<section id="creationCommande">
     <div>
         <p>
-            Récapitulatif de votre commande :
+            Votre commande est bien enregistrée, retrouvez-la dans l'onglet MON COMPTE
         </p>
     </div>
 </section>

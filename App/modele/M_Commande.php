@@ -26,9 +26,7 @@ class M_Commande {
         $stmt->bindParam(':mode_paiement', $mode_paiement, PDO::PARAM_STR);
         $stmt->execute();
 
-        // $stmt->fetchAll(PDO::FETCH_ASSOC);
         $idCommande = AccesDonnees::getPdo()->lastInsertId();
-        var_dump($listJeux);
 
         foreach ($listJeux as $jeu) {
             $req = "INSERT INTO lignes_commande(commande_id, exemplaire_id) VALUES (:idCommande,:idJeu)";
@@ -60,7 +58,7 @@ class M_Commande {
             $erreurs[] = "Il faut saisir le champ nom";
         }
         if ($prenom == "") {
-            $erreurs[] = "Il faut saisir le champ nom";
+            $erreurs[] = "Il faut saisir le champ prénom";
         }
         if ($rue == "") {
             $erreurs[] = "Il faut saisir le champ rue";

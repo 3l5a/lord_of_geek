@@ -51,8 +51,10 @@ class M_Utilisateur
 
         $client = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        if ($client) {
         $mdpClient = $client['mot_de_passe'];
         $mdp = password_verify($mdp, $mdpClient);
+        }
 
         return $client;
     }
@@ -111,9 +113,9 @@ class M_Utilisateur
     public static function userOrders($id): array
     {
         $req = "SELECT DISTINCT commandes.*, references_jeux.titre, consoles.nom_console FROM commandes
-                JOIN lignes_commande ON commandes.id = lignes_commande.commande_id
                 JOIN exemplaires ON exemplaires.reference_jeu_id = reference_jeu_id
-                JOIN references_jeux ON references_jeux.id = exemplaire_id
+                JOIN lignes_commande ON commandes.id = lignes_commande.commande_id AND exemplaires.id = lignes_commande.exemplaire_id
+                JOIN references_jeux ON exemplaires.reference_jeu_id = references_jeux.id
                 JOIN consoles ON consoles.id = exemplaires.consoles_id
                 WHERE client_id = :id 
                 GROUP BY created_at, references_jeux.titre
